@@ -11,7 +11,7 @@ services:
         - AUTH_KEY=1Auth_token
       no_cache : true
     ports:
-      - 8888:8888 
+      - 9999:8888 
 
     volumes:
       - .:/mojo
