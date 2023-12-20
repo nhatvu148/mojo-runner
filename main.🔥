@@ -1,0 +1,62 @@
+from python import Python, PythonObject
+
+fn run() raises:
+    let datetime = Python.import_module("datetime")
+
+    let start_time = datetime.datetime.now()
+
+    for i in range(10000):
+        print(i)
+
+    let end_time = datetime.datetime.now()
+    let time_diff = end_time - start_time
+    let minutes = time_diff.total_seconds() // 60
+    let seconds = time_diff.total_seconds() % 60
+
+    print(minutes)
+    print(seconds)
+
+    # let py = Python.import_module("builtins")
+    # let user_input = py.input("What's your name?")
+    # print("Your name is ", user_input)
+
+    let x: PythonObject = [2, 4, 5, 6, 7]
+    for i in range(x.__len__()):
+        print(x[i])
+
+    let y = SIMD[DType.float16, 4](1, 4, 9, 16)
+    print(y*2)
+
+fn add(a: Int, b: Int) -> Int:
+    return a + b
+
+struct Thing:
+    var word: String
+    var num: Int
+
+    fn __init__(inout self, word: String, num: Int):
+        self.word = word
+        self.num = num
+
+fn do_something(owned thing: Thing):
+    thing.word = "world"
+    print(thing.word)
+
+fn add[datatype: DType, length: Int](a: SIMD[datatype, length], b: SIMD[datatype, length]) -> SIMD[datatype, length]:
+    return a + b
+
+fn main():
+    let x: Int = 10
+    print("hello")
+    let thing = Thing("hello", 12)
+    print(thing.num)
+    print(add(x, 123))
+    do_something(thing^)
+
+    let y = SIMD[DType.float16, 4](1, 4, 9, 16)
+    print(y*4)
+    print(add(y, y))
+
+    try:
+        run()
+    except:
